@@ -1,0 +1,41 @@
+﻿<Window x:Class="UseRibbonDeferredPageLoading.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon" 
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <dxr:RibbonControl>
+            <dxr:RibbonPage Caption="Page 1">
+                <dxr:RibbonPageGroup Caption="Group 1">
+                    <dxb:BarButtonItem Content="Item 1"/>
+                </dxr:RibbonPageGroup>
+            </dxr:RibbonPage>
+            <dxr:RibbonPage Caption="Page2">
+                <dxr:RibbonPage.Commands>
+                    <dxb:BarItemCommand x:Key="openCommand" Command="{Binding Path=OpenCommand}" KeyGesture="CTRL+O"/>
+                </dxr:RibbonPage.Commands>
+                <dxr:RibbonPage.GroupCollectionTemplate>
+                    <DataTemplate>
+                        <ItemsControl>
+                            <dxr:RibbonPageGroup Caption="Group 2">
+                                <dxb:BarButtonItem Content="Open" Command="{Binding Path=(dxr:RibbonPage.RibbonPage).Commands[openCommand], RelativeSource={RelativeSource Self}}" />
+                                <dxb:BarButtonItem Content="Item 2"/>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup Caption="Group 3">
+                                <dxb:BarSubItem Content="SubItem">
+                                    <dxb:BarButtonItem Content="SubItem 1"/>
+                                    <dxb:BarButtonItem Content="SubItem 2"/>
+                                    <dxb:BarButtonItem Content="SubItem 3"/>
+                                </dxb:BarSubItem>
+                            </dxr:RibbonPageGroup>
+                        </ItemsControl>
+                    </DataTemplate>
+                </dxr:RibbonPage.GroupCollectionTemplate>
+            </dxr:RibbonPage>
+        </dxr:RibbonControl>
+    </Grid>
+</Window>
